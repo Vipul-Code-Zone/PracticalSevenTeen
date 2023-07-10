@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PracSevenTeen.Models.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Student List</h1>
+@if(User.IsInRole("Admin")){
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-primary">Create New</a>
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr class="text-center table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="text-center">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Standard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { Id =item.Id }, htmlAttributes: new{@class = "btn btn-sm btn-warning"}) |
+                    @Html.ActionLink("Details", "Details", new { Id =item.Id}, htmlAttributes: new{@class = "btn btn-sm btn-info"}) |
+                    @Html.ActionLink("Delete", "Delete", new { Id =item.Id}, htmlAttributes: new{@class = "btn btn-sm btn-danger"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr class="text-center table-dark">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Standard)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Standard)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { Id =item.Id}, htmlAttributes: new{@class = "btn btn-sm btn-info"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
